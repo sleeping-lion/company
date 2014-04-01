@@ -1,34 +1,9 @@
 <section id="product_index">
   <% unless @products.empty? %>
   <% @products.each do |product| %>
-	<article class="product col-6 col-sm-6 col-lg-4">
-		<div class="article_top">
-			<h2><%=link_to product.title,product %></h2>
-			<% if product.photo %>
-			<%=image_tag product.photo.large_thumb,:class=>'img-responsive',:itemprop=>"contentURL" %>
-			<% end %>
-			<p><span class="arial"><%=product.price %></span>만원</p>		
-		</div>
-		<dl class="dl-horizontal">		
-			<dt>페이지수</dt>
-			<dd>총<strong class="arial"><%=product.page %></strong>페이지이내</dd>
-			<dt>제작기간</dt>
-			<dd>15 일 완성</dd>
-			<dt>기본제공</dt>
-			<dt>호스팅</dt>
-			<dd><span class="arial">1</span>년 무료제공</dd>
-			<dt>도메인</dt>
-			<dd><span class="arial">1</span>년 무료제공</dd>
-			<dt>유지보수</dt>
-			<dd><span class="arial">2</span>개월 지원</dd>
-			<dt>로고제작</dt>
-			<dd>이미지 무료제공</dd>
-		</dl>
-		<%=link_to product_path(product) do %>
-		<figure>
-			<%=image_tag product.photo.medium_thumb %>
-		</figure>
-		<% end %>
+	<article class="product">
+
+
   <% if can? :update, Product %>		
 		<%=link_to t(:link_edit),edit_product_path(product) %>
 		<% end %>

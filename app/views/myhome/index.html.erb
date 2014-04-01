@@ -1,0 +1,24 @@
+<section id="product_index">
+  <% unless @products.empty? %>
+  <% @products.each do |product| %>
+	<article class="product">
+
+
+  <% if can? :update, Product %>		
+		<%=link_to t(:link_edit),edit_product_path(product) %>
+		<% end %>
+		<% if can? :delete, Product %>
+		<%=link_to t(:link_delete),product_path(product), method: :delete, data: { confirm: t(:delete_confirm)} %>	
+		<% end %>
+	</article>
+	<% end %>
+	<% else %>
+	<article class="product"><%=t(:no_data)%></article>
+	<% end %>
+  <div id="sl_bottom_menu">
+  <% if can? :create, Product %>
+    <%= link_to t(:link_new), new_product_path,:rel=>"nofollow" %>
+  <% end %>
+  <%= paginate @products %>
+  </div>
+</section>

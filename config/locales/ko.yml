@@ -53,6 +53,9 @@ ko:
   link_back : '뒤로'
   link_home : '홈으로'
   
+  home_main_title : '아직도 홈페이지가 없으세요??'
+  home_main_description : '이제 클릭 몇번으로 나의 홈페이지를 가지세요'    
+  now_get_myhome : '내 홈페이지 갖기'  
   company_main_title : '최고의 웹페이지만 제작하는 SL WEB COMPANY'
   company_main_description : 'HTML5, 반응형웹,  최소의 이미지로 최고의 웹페이지를 만들어 갑니다.'
   

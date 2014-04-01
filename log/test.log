@@ -1,0 +1,196 @@
+  [1m[36m (13.2ms)[0m  [1mCREATE TABLE "faq_categories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255) NOT NULL, "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (28.5ms)[0m  CREATE TABLE "faq_contents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "html" boolean DEFAULT 'f' NOT NULL, "content" varchar(255)) 
+  [1m[36m (32.6ms)[0m  [1mCREATE TABLE "faqs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "faq_category_id" integer NOT NULL, "title" varchar(255) NOT NULL, "count" integer DEFAULT 0 NOT NULL, "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (24.3ms)[0m  CREATE INDEX "index_faqs_on_faq_category_id" ON "faqs" ("faq_category_id")
+  [1m[36m (31.6ms)[0m  [1mCREATE TABLE "galleries" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "gallery_category_id" integer NOT NULL, "title" varchar(255) NOT NULL, "photo" varchar(255) NOT NULL, "content" text NOT NULL, "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (36.5ms)[0m  CREATE INDEX "index_galleries_on_gallery_category_id" ON "galleries" ("gallery_category_id")
+  [1m[36m (30.5ms)[0m  [1mCREATE TABLE "gallery_categories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255) NOT NULL, "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (26.6ms)[0m  CREATE TABLE "guest_book_comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "guest_book_id" integer NOT NULL, "user_id" integer, "name" varchar(255), "encrypted_password" varchar(40), "salt" varchar(255), "content" text NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (32.4ms)[0m  [1mCREATE INDEX "index_guest_book_comments_on_guest_book_id" ON "guest_book_comments" ("guest_book_id")[0m
+  [1m[35m (32.6ms)[0m  CREATE INDEX "index_guest_book_comments_on_user_id" ON "guest_book_comments" ("user_id")
+  [1m[36m (33.8ms)[0m  [1mCREATE TABLE "guest_book_contents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "content" text NOT NULL) [0m
+  [1m[35m (33.9ms)[0m  CREATE TABLE "guest_books" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "title" varchar(60) NOT NULL, "name" varchar(60), "encrypted_password" varchar(40), "salt" varchar(255), "guest_book_comments_count" integer DEFAULT 0 NOT NULL, "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (38.8ms)[0m  [1mCREATE INDEX "index_guest_books_on_user_id" ON "guest_books" ("user_id")[0m
+  [1m[35m (28.6ms)[0m  CREATE TABLE "histories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer NOT NULL, "year" varchar(40) NOT NULL, "title" varchar(60) NOT NULL, "content" text NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (32.8ms)[0m  [1mCREATE INDEX "index_histories_on_user_id" ON "histories" ("user_id")[0m
+  [1m[35m (30.2ms)[0m  CREATE TABLE "impressions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "impressionable_type" varchar(255), "impressionable_id" integer, "user_id" integer, "controller_name" varchar(255), "action_name" varchar(255), "view_name" varchar(255), "request_hash" varchar(255), "ip_address" varchar(255), "session_hash" varchar(255), "message" text, "referrer" text, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (29.8ms)[0m  [1mCREATE INDEX "controlleraction_ip_index" ON "impressions" ("controller_name", "action_name", "ip_address")[0m
+  [1m[35m (27.0ms)[0m  CREATE INDEX "controlleraction_request_index" ON "impressions" ("controller_name", "action_name", "request_hash")
+  [1m[36m (31.2ms)[0m  [1mCREATE INDEX "controlleraction_session_index" ON "impressions" ("controller_name", "action_name", "session_hash")[0m
+  [1m[35m (32.6ms)[0m  CREATE INDEX "poly_ip_index" ON "impressions" ("impressionable_type", "impressionable_id", "ip_address")
+  [1m[36m (41.7ms)[0m  [1mCREATE INDEX "poly_request_index" ON "impressions" ("impressionable_type", "impressionable_id", "request_hash")[0m
+  [1m[35m (48.0ms)[0m  CREATE INDEX "poly_session_index" ON "impressions" ("impressionable_type", "impressionable_id", "session_hash")
+  [1m[36m (27.5ms)[0m  [1mCREATE INDEX "index_impressions_on_user_id" ON "impressions" ("user_id")[0m
+  [1m[35m (24.7ms)[0m  CREATE TABLE "maintain" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(60) NOT NULL, "photo" varchar(255), "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (32.0ms)[0m  [1mCREATE TABLE "maintain_contents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "content" text NOT NULL) [0m
+  [1m[35m (25.1ms)[0m  CREATE TABLE "notice_contents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "content" text NOT NULL) 
+  [1m[36m (37.0ms)[0m  [1mCREATE TABLE "notices" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer NOT NULL, "title" varchar(60) NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (39.5ms)[0m  CREATE INDEX "index_notices_on_user_id" ON "notices" ("user_id")
+  [1m[36m (18.2ms)[0m  [1mCREATE TABLE "portfolio_contents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "content" text NOT NULL) [0m
+  [1m[35m (19.3ms)[0m  CREATE TABLE "portfolios" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255) NOT NULL, "url" varchar(255) NOT NULL, "description" text NOT NULL, "photo" varchar(255) NOT NULL, "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (20.4ms)[0m  [1mCREATE TABLE "product_contents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "html" boolean DEFAULT 'f' NOT NULL, "content" text NOT NULL) [0m
+  [1m[35m (16.3ms)[0m  CREATE TABLE "product_options" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(60) NOT NULL, "description" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (10.9ms)[0m  [1mCREATE TABLE "products" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255) DEFAULT '0' NOT NULL, "price" integer DEFAULT 0 NOT NULL, "price_discount" integer DEFAULT 0 NOT NULL, "page" integer DEFAULT 0 NOT NULL, "description" varchar(255) NOT NULL, "program" varchar(255), "photo" varchar(255), "make_day" integer DEFAULT 7 NOT NULL, "full" boolean DEFAULT 'f' NOT NULL, "main_show" boolean DEFAULT 'f' NOT NULL, "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (11.8ms)[0m  CREATE TABLE "projects" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(60) NOT NULL, "description" varchar(255) NOT NULL, "photo" varchar(255), "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (31.7ms)[0m  [1mCREATE TABLE "question_comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "question_id" integer NOT NULL, "user_id" integer, "name" varchar(255), "encrypted_password" varchar(40), "salt" varchar(255), "content" text NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (29.7ms)[0m  CREATE INDEX "index_question_comments_on_question_id" ON "question_comments" ("question_id")
+  [1m[36m (29.3ms)[0m  [1mCREATE INDEX "index_question_comments_on_user_id" ON "question_comments" ("user_id")[0m
+  [1m[35m (21.4ms)[0m  CREATE TABLE "question_contents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "content" text NOT NULL) 
+  [1m[36m (27.0ms)[0m  [1mCREATE TABLE "questions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "title" varchar(60) NOT NULL, "name" varchar(60), "encrypted_password" varchar(40), "salt" varchar(255), "secret" integer DEFAULT 0 NOT NULL, "question_comments_count" integer DEFAULT 0 NOT NULL, "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (34.7ms)[0m  CREATE INDEX "index_questions_on_user_id" ON "questions" ("user_id")
+  [1m[36m (27.4ms)[0m  [1mCREATE TABLE "resource_photos" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "resource_id" integer NOT NULL, "photo" varchar(255) NOT NULL, "alt" varchar(60) NOT NULL, "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (31.4ms)[0m  CREATE INDEX "index_resource_photos_on_resource_id" ON "resource_photos" ("resource_id")
+  [1m[36m (31.0ms)[0m  [1mCREATE TABLE "resources" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "ad_position_id" integer NOT NULL, "title" varchar(60) NOT NULL, "description" varchar(255), "controller" varchar(60) NOT NULL, "menu_action" varchar(60) DEFAULT 'index' NOT NULL, "use_category" boolean DEFAULT 'f' NOT NULL, "menu_display" boolean DEFAULT 't' NOT NULL, "per" integer DEFAULT 10 NOT NULL, "desc" boolean DEFAULT 't' NOT NULL, "enable" boolean DEFAULT 't' NOT NULL, "priority" integer DEFAULT 100 NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (26.8ms)[0m  CREATE INDEX "index_resources_on_ad_position_id" ON "resources" ("ad_position_id")
+  [1m[36m (27.0ms)[0m  [1mCREATE UNIQUE INDEX "index_resources_on_controller" ON "resources" ("controller")[0m
+  [1m[35m (32.6ms)[0m  CREATE UNIQUE INDEX "index_resources_on_title" ON "resources" ("title")
+  [1m[36m (29.4ms)[0m  [1mCREATE TABLE "template_authors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "korean_name" varchar(60), "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (29.7ms)[0m  CREATE TABLE "template_categories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(60) NOT NULL, "korean_name" varchar(60), "count" integer DEFAULT 0 NOT NULL, "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (27.9ms)[0m  [1mCREATE TABLE "template_categories_templates" ("template_id" integer, "template_category_id" integer) [0m
+  [1m[35m (25.5ms)[0m  CREATE TABLE "template_packages" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "korean_name" varchar(60), "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (33.4ms)[0m  [1mCREATE TABLE "template_screenshots" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "template_id" integer, "uri" varchar(255) NOT NULL, "small_preview" boolean DEFAULT 'f' NOT NULL, "main_preview" boolean DEFAULT 'f' NOT NULL, "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (31.2ms)[0m  CREATE INDEX "index_template_screenshots_on_template_id" ON "template_screenshots" ("template_id")
+  [1m[36m (25.2ms)[0m  [1mCREATE TABLE "template_softwares" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "korean_name" varchar(60), "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (24.1ms)[0m  CREATE TABLE "template_softwares_templates" ("template_id" integer, "template_software_id" integer) 
+  [1m[36m (27.7ms)[0m  [1mCREATE TABLE "template_sources" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "korean_name" varchar(60), "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (26.9ms)[0m  CREATE TABLE "template_sources_templates" ("template_id" integer, "template_source_id" integer) 
+  [1m[36m (31.2ms)[0m  [1mCREATE TABLE "template_types" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "product_id" integer, "name" varchar(60) NOT NULL, "korean_name" varchar(60), "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (27.3ms)[0m  CREATE INDEX "index_template_types_on_product_id" ON "template_types" ("product_id")
+  [1m[36m (24.7ms)[0m  [1mCREATE TABLE "templates" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(60), "template_type_id" integer NOT NULL, "template_author_id" integer NOT NULL, "template_package_id" integer NOT NULL, "state" integer DEFAULT 0 NOT NULL, "price" integer DEFAULT 0 NOT NULL, "exc_price" integer DEFAULT 0 NOT NULL, "downloads" integer DEFAULT 0 NOT NULL, "is_flash" boolean DEFAULT 'f' NOT NULL, "is_adult" boolean DEFAULT 'f' NOT NULL, "is_full_site" boolean DEFAULT 'f' NOT NULL, "is_real_size" boolean DEFAULT 'f' NOT NULL, "is_recommend" boolean DEFAULT 'f' NOT NULL, "is_main" boolean DEFAULT 'f' NOT NULL, "inserted_date" datetime, "update_date" datetime, "keywords" varchar(255), "main_screenshot" varchar(255), "small_screenshot" varchar(255), "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (24.2ms)[0m  CREATE INDEX "index_templates_on_template_author_id" ON "templates" ("template_author_id")
+  [1m[36m (25.1ms)[0m  [1mCREATE INDEX "index_templates_on_template_package_id" ON "templates" ("template_package_id")[0m
+  [1m[35m (26.2ms)[0m  CREATE INDEX "index_templates_on_template_type_id" ON "templates" ("template_type_id")
+  [1m[36m (22.3ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255) NOT NULL, "name" varchar(255) NOT NULL, "encrypted_password" varchar(255) NOT NULL, "photo" varchar(255), "reset_password_token" varchar(255), "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255), "admin" integer DEFAULT 0) [0m
+  [1m[35m (22.3ms)[0m  CREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")
+  [1m[36m (19.0ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35m (32.0ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (32.9ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.1ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (25.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130324093627')[0m
+  [1m[35m (21.6ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130324093505')
+  [1m[36m (30.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20121216002154')[0m
+  [1m[35m (25.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130324093507')
+  [1m[36m (23.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130324093504')[0m
+  [1m[35m (27.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130124093540')
+  [1m[36m (27.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130324093508')[0m
+  [1m[35m (26.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130324093509')
+  [1m[36m (28.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130101002148')[0m
+  [1m[35m (32.6ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130324093546')
+  [1m[36m (31.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20121223140414')[0m
+  [1m[35m (25.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130324093547')
+  [1m[36m (31.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20120520234126')[0m
+  [1m[35m (26.6ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130124093541')
+  [1m[36m (21.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130324093503')[0m
+  [1m[35m (31.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20120624164124')
+  [1m[36m (30.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20120520234229')[0m
+  [1m[35m (26.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20121216002156')
+  [1m[36m (32.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20120620234126')[0m
+  [1m[35m (24.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20121216002148')
+  [1m[36m (33.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130324093510')[0m
+  [1m[35m (30.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20121216023255')
+  [1m[36m (21.7ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130101002149')[0m
+  [1m[35m (27.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130324093500')
+  [1m[36m (20.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20111214055337')[0m
+  [1m[35m (27.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20121223094638')
+  [1m[36m (21.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130324093501')[0m
+  [1m[35m (42.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20121216002149')
+  [1m[36m (39.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130324093506')[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (37.1ms)[0m  [1mCREATE TABLE "faq_categories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255) NOT NULL, "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (16.5ms)[0m  CREATE TABLE "faq_contents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "html" boolean DEFAULT 'f' NOT NULL, "content" varchar(255)) 
+  [1m[36m (29.0ms)[0m  [1mCREATE TABLE "faqs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "faq_category_id" integer NOT NULL, "title" varchar(255) NOT NULL, "count" integer DEFAULT 0 NOT NULL, "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (26.5ms)[0m  CREATE INDEX "index_faqs_on_faq_category_id" ON "faqs" ("faq_category_id")
+  [1m[36m (28.6ms)[0m  [1mCREATE TABLE "galleries" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "gallery_category_id" integer NOT NULL, "title" varchar(255) NOT NULL, "photo" varchar(255) NOT NULL, "content" text NOT NULL, "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (32.1ms)[0m  CREATE INDEX "index_galleries_on_gallery_category_id" ON "galleries" ("gallery_category_id")
+  [1m[36m (33.9ms)[0m  [1mCREATE TABLE "gallery_categories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255) NOT NULL, "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (27.8ms)[0m  CREATE TABLE "guest_book_comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "guest_book_id" integer NOT NULL, "user_id" integer, "name" varchar(255), "encrypted_password" varchar(40), "salt" varchar(255), "content" text NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (32.8ms)[0m  [1mCREATE INDEX "index_guest_book_comments_on_guest_book_id" ON "guest_book_comments" ("guest_book_id")[0m
+  [1m[35m (36.6ms)[0m  CREATE INDEX "index_guest_book_comments_on_user_id" ON "guest_book_comments" ("user_id")
+  [1m[36m (30.6ms)[0m  [1mCREATE TABLE "guest_book_contents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "content" text NOT NULL) [0m
+  [1m[35m (35.5ms)[0m  CREATE TABLE "guest_books" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "title" varchar(60) NOT NULL, "name" varchar(60), "encrypted_password" varchar(40), "salt" varchar(255), "guest_book_comments_count" integer DEFAULT 0 NOT NULL, "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (32.8ms)[0m  [1mCREATE INDEX "index_guest_books_on_user_id" ON "guest_books" ("user_id")[0m
+  [1m[35m (25.7ms)[0m  CREATE TABLE "histories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer NOT NULL, "year" varchar(40) NOT NULL, "title" varchar(60) NOT NULL, "content" text NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (27.7ms)[0m  [1mCREATE INDEX "index_histories_on_user_id" ON "histories" ("user_id")[0m
+  [1m[35m (21.5ms)[0m  CREATE TABLE "impressions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "impressionable_type" varchar(255), "impressionable_id" integer, "user_id" integer, "controller_name" varchar(255), "action_name" varchar(255), "view_name" varchar(255), "request_hash" varchar(255), "ip_address" varchar(255), "session_hash" varchar(255), "message" text, "referrer" text, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (35.4ms)[0m  [1mCREATE INDEX "controlleraction_ip_index" ON "impressions" ("controller_name", "action_name", "ip_address")[0m
+  [1m[35m (30.2ms)[0m  CREATE INDEX "controlleraction_request_index" ON "impressions" ("controller_name", "action_name", "request_hash")
+  [1m[36m (28.8ms)[0m  [1mCREATE INDEX "controlleraction_session_index" ON "impressions" ("controller_name", "action_name", "session_hash")[0m
+  [1m[35m (32.5ms)[0m  CREATE INDEX "poly_ip_index" ON "impressions" ("impressionable_type", "impressionable_id", "ip_address")
+  [1m[36m (32.7ms)[0m  [1mCREATE INDEX "poly_request_index" ON "impressions" ("impressionable_type", "impressionable_id", "request_hash")[0m
+  [1m[35m (23.6ms)[0m  CREATE INDEX "poly_session_index" ON "impressions" ("impressionable_type", "impressionable_id", "session_hash")
+  [1m[36m (33.7ms)[0m  [1mCREATE INDEX "index_impressions_on_user_id" ON "impressions" ("user_id")[0m
+  [1m[35m (39.5ms)[0m  CREATE TABLE "maintain" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(60) NOT NULL, "photo" varchar(255), "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (28.1ms)[0m  [1mCREATE TABLE "maintain_contents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "content" text NOT NULL) [0m
+  [1m[35m (35.1ms)[0m  CREATE TABLE "notice_contents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "content" text NOT NULL) 
+  [1m[36m (35.0ms)[0m  [1mCREATE TABLE "notices" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer NOT NULL, "title" varchar(60) NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (33.4ms)[0m  CREATE INDEX "index_notices_on_user_id" ON "notices" ("user_id")
+  [1m[36m (35.1ms)[0m  [1mCREATE TABLE "portfolio_contents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "content" text NOT NULL) [0m
+  [1m[35m (28.2ms)[0m  CREATE TABLE "portfolios" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255) NOT NULL, "url" varchar(255) NOT NULL, "description" text NOT NULL, "photo" varchar(255) NOT NULL, "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (28.9ms)[0m  [1mCREATE TABLE "product_contents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "html" boolean DEFAULT 'f' NOT NULL, "content" text NOT NULL) [0m
+  [1m[35m (27.5ms)[0m  CREATE TABLE "product_options" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(60) NOT NULL, "description" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (22.2ms)[0m  [1mCREATE TABLE "products" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255) DEFAULT '0' NOT NULL, "price" integer DEFAULT 0 NOT NULL, "price_discount" integer DEFAULT 0 NOT NULL, "page" integer DEFAULT 0 NOT NULL, "description" varchar(255) NOT NULL, "program" varchar(255), "photo" varchar(255), "make_day" integer DEFAULT 7 NOT NULL, "full" boolean DEFAULT 'f' NOT NULL, "main_show" boolean DEFAULT 'f' NOT NULL, "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (28.9ms)[0m  CREATE TABLE "projects" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(60) NOT NULL, "description" varchar(255) NOT NULL, "photo" varchar(255), "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (30.5ms)[0m  [1mCREATE TABLE "question_comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "question_id" integer NOT NULL, "user_id" integer, "name" varchar(255), "encrypted_password" varchar(40), "salt" varchar(255), "content" text NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (24.7ms)[0m  CREATE INDEX "index_question_comments_on_question_id" ON "question_comments" ("question_id")
+  [1m[36m (23.1ms)[0m  [1mCREATE INDEX "index_question_comments_on_user_id" ON "question_comments" ("user_id")[0m
+  [1m[35m (30.9ms)[0m  CREATE TABLE "question_contents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "content" text NOT NULL) 
+  [1m[36m (26.8ms)[0m  [1mCREATE TABLE "questions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "title" varchar(60) NOT NULL, "name" varchar(60), "encrypted_password" varchar(40), "salt" varchar(255), "secret" integer DEFAULT 0 NOT NULL, "question_comments_count" integer DEFAULT 0 NOT NULL, "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (25.9ms)[0m  CREATE INDEX "index_questions_on_user_id" ON "questions" ("user_id")
+  [1m[36m (31.2ms)[0m  [1mCREATE TABLE "resource_photos" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "resource_id" integer NOT NULL, "photo" varchar(255) NOT NULL, "alt" varchar(60) NOT NULL, "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (22.2ms)[0m  CREATE INDEX "index_resource_photos_on_resource_id" ON "resource_photos" ("resource_id")
+  [1m[36m (27.0ms)[0m  [1mCREATE TABLE "resources" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "ad_position_id" integer NOT NULL, "title" varchar(60) NOT NULL, "description" varchar(255), "controller" varchar(60) NOT NULL, "menu_action" varchar(60) DEFAULT 'index' NOT NULL, "use_category" boolean DEFAULT 'f' NOT NULL, "menu_display" boolean DEFAULT 't' NOT NULL, "per" integer DEFAULT 10 NOT NULL, "desc" boolean DEFAULT 't' NOT NULL, "enable" boolean DEFAULT 't' NOT NULL, "priority" integer DEFAULT 100 NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (26.6ms)[0m  CREATE INDEX "index_resources_on_ad_position_id" ON "resources" ("ad_position_id")
+  [1m[36m (25.6ms)[0m  [1mCREATE UNIQUE INDEX "index_resources_on_controller" ON "resources" ("controller")[0m
+  [1m[35m (21.3ms)[0m  CREATE UNIQUE INDEX "index_resources_on_title" ON "resources" ("title")
+  [1m[36m (23.7ms)[0m  [1mCREATE TABLE "template_authors" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "korean_name" varchar(60), "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (21.5ms)[0m  CREATE TABLE "template_categories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(60) NOT NULL, "korean_name" varchar(60), "count" integer DEFAULT 0 NOT NULL, "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (34.1ms)[0m  [1mCREATE TABLE "template_categories_templates" ("template_id" integer, "template_category_id" integer) [0m
+  [1m[35m (49.0ms)[0m  CREATE TABLE "template_packages" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "korean_name" varchar(60), "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (23.2ms)[0m  [1mCREATE TABLE "template_screenshots" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "template_id" integer, "uri" varchar(255) NOT NULL, "small_preview" boolean DEFAULT 'f' NOT NULL, "main_preview" boolean DEFAULT 'f' NOT NULL, "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (32.7ms)[0m  CREATE INDEX "index_template_screenshots_on_template_id" ON "template_screenshots" ("template_id")
+  [1m[36m (26.0ms)[0m  [1mCREATE TABLE "template_softwares" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "korean_name" varchar(60), "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (28.0ms)[0m  CREATE TABLE "template_softwares_templates" ("template_id" integer, "template_software_id" integer) 
+  [1m[36m (33.8ms)[0m  [1mCREATE TABLE "template_sources" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255) NOT NULL, "korean_name" varchar(60), "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (35.5ms)[0m  CREATE TABLE "template_sources_templates" ("template_id" integer, "template_source_id" integer) 
+  [1m[36m (34.1ms)[0m  [1mCREATE TABLE "template_types" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "product_id" integer, "name" varchar(60) NOT NULL, "korean_name" varchar(60), "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (40.7ms)[0m  CREATE INDEX "index_template_types_on_product_id" ON "template_types" ("product_id")
+  [1m[36m (32.3ms)[0m  [1mCREATE TABLE "templates" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(60), "template_type_id" integer NOT NULL, "template_author_id" integer NOT NULL, "template_package_id" integer NOT NULL, "state" integer DEFAULT 0 NOT NULL, "price" integer DEFAULT 0 NOT NULL, "exc_price" integer DEFAULT 0 NOT NULL, "downloads" integer DEFAULT 0 NOT NULL, "is_flash" boolean DEFAULT 'f' NOT NULL, "is_adult" boolean DEFAULT 'f' NOT NULL, "is_full_site" boolean DEFAULT 'f' NOT NULL, "is_real_size" boolean DEFAULT 'f' NOT NULL, "is_recommend" boolean DEFAULT 'f' NOT NULL, "is_main" boolean DEFAULT 'f' NOT NULL, "inserted_date" datetime, "update_date" datetime, "keywords" varchar(255), "main_screenshot" varchar(255), "small_screenshot" varchar(255), "enable" boolean DEFAULT 't' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (34.2ms)[0m  CREATE INDEX "index_templates_on_template_author_id" ON "templates" ("template_author_id")
+  [1m[36m (32.1ms)[0m  [1mCREATE INDEX "index_templates_on_template_package_id" ON "templates" ("template_package_id")[0m
+  [1m[35m (27.1ms)[0m  CREATE INDEX "index_templates_on_template_type_id" ON "templates" ("template_type_id")
+  [1m[36m (30.6ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255) NOT NULL, "name" varchar(255) NOT NULL, "encrypted_password" varchar(255) NOT NULL, "photo" varchar(255), "reset_password_token" varchar(255), "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255), "admin" integer DEFAULT 0) [0m
+  [1m[35m (29.8ms)[0m  CREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")
+  [1m[36m (29.0ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35m (21.1ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (28.0ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.1ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (24.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130324093627')[0m
+  [1m[35m (21.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130324093505')
+  [1m[36m (58.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20121216002154')[0m
+  [1m[35m (21.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130324093507')
+  [1m[36m (23.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130324093504')[0m
+  [1m[35m (34.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130124093540')
+  [1m[36m (28.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130324093508')[0m
+  [1m[35m (26.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130324093509')
+  [1m[36m (27.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130101002148')[0m
+  [1m[35m (18.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130324093546')
+  [1m[36m (25.0ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20121223140414')[0m
+  [1m[35m (25.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130324093547')
+  [1m[36m (34.9ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20120520234126')[0m
+  [1m[35m (26.3ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130124093541')
+  [1m[36m (37.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130324093503')[0m
+  [1m[35m (26.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20120624164124')
+  [1m[36m (27.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20120520234229')[0m
+  [1m[35m (27.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20121216002156')
+  [1m[36m (36.7ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20120620234126')[0m
+  [1m[35m (25.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20121216002148')
+  [1m[36m (25.1ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130324093510')[0m
+  [1m[35m (20.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20121216023255')
+  [1m[36m (26.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130101002149')[0m
+  [1m[35m (34.8ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20130324093500')
+  [1m[36m (29.6ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20111214055337')[0m
+  [1m[35m (14.6ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20121223094638')
+  [1m[36m (33.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130324093501')[0m
+  [1m[35m (23.0ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20121216002149')
+  [1m[36m (15.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20130324093506')[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"

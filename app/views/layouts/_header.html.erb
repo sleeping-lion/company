@@ -9,10 +9,6 @@
     <h1><%=link_to t(:company_name),root_path %></h1>
     <ul id="main_menu">
 		<li <%=raw(current_controller(['products'])) %>><%=link_to '상품',products_path %></li>
-		<li <%=raw(current_controller(['templates'])) %>><%=link_to '템플릿',templates_path %></li>			
-		<li <%=raw(current_controller(['portfolios'])) %>><%=link_to '포트폴리오',portfolios_path %></li>		
-		<li <%=raw(current_controller(['maintain'])) %>><%=link_to '유지보수',maintain_index_path %></li>			
-		<li <%=raw(current_controller(['projects'])) %>><%=link_to '프로젝트',projects_path %></li>		
 		<li class="dropdown" <%=raw(current_controller(['customer_center/notices','customer_center/faqs','customer_center/questions','customer_center/guest_books'])) %>>				
 				<%=link_to customer_center_notices_path,:class=>"dropdown-toggle",:'data-toggle'=>"dropdown"  do %>
 					고객센터
@@ -41,9 +37,7 @@
 					</li>
 				</ul>							
 			</li>
-			<li class="divider-vertical"></li>			
-			<li <%=raw(current_controller(['company'])) %>><%=link_to '회사소개',company_index_path %></li>
-			<li class="divider-vertical"></li>			
+			<li class="divider-vertical"></li>
 	</ul>
 	</nav>
 </header>

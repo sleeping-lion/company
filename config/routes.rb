@@ -17,6 +17,7 @@ Webagency::Application.routes.draw do
   resources :maintain
   resources :company
   resources :histories
+  resources :myhome
   
   namespace :customer_center do
     resources :faqs
