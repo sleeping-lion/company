@@ -1,0 +1,25 @@
+<section id="products_tab_slider">
+	<div class="section_top">
+		<h2>홈페이지 제작 상품</h2>
+	</div>
+	<div class="tabbable tabs-left">
+		<ul class="nav nav-tabs">
+			<% if(@products.length>0) %>
+			<% @products.each_with_index do |product,index| %>
+			<li><%=link_to product.title,"#product_tab_#{index}",:'data-toggle'=>"tab" %></li>
+			<% end %>
+			<% else %>
+			<% end %>
+		</ul>
+		<section class="tab-content">
+		<% if(@products.length>0) %>
+		<% @products.each_with_index do |product,index| %>			
+     	<div class="tab-pane<% if(index) %> active<% end %>" id="product_tab_<%index%>">
+        <h3><%=product.title %></h3>
+       </div>
+		<% end %>
+		<% else %>
+		<% end %>
+	</section>
+	</div>	
+</section>

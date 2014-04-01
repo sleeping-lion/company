@@ -1,0 +1,27 @@
+<section id="sl_template_show">
+
+
+
+  <% if @template.flash? %>
+  <iframe id="iframe" scrolling="no" frameborder="0"  {?content.width}width="{content.width}"{:}width="1000"{/}  {?content.height}height="{content.height}"{:}height="650"{/} src="{?content.flash}{content.flash}{:}{content.path}{content.id}.html{/}" style="{?content.width}{?content.width<970}margin:15px 0 0 {(970-content.width)/2-20}px{:}margin:0 auto;{/}{:}margin:0 0 0 70px{/}">[Your user agent does not support frames or is currently configured  not to display frames. However, you may visit the related document.]</iframe>
+  <% else %>
+  <a class="image" rel="prettyPhoto[portfolio]" href="{content.bottomScreenshot.list[0].uri}" id="webmakin-detail-banner" style="background:#fff">
+  <% @template.main_img? %>
+  <img id="main_image" src="{content.main_img.src}" width="{content.main_img.width}" height="{content.main_img.height}" />
+  <% end %>
+  </a>
+  <% end %>
+
+
+
+
+  
+	<div id="sl_content_bottom_menu">	
+	<% if user_signed_in? %>
+	<% if current_user.admin? %>	
+	<%= link_to t(:link_edit), edit_template_path(@template) %> |
+	<% end %>
+	<% end %>
+	<%= link_to t(:link_list), templates_path %>
+	</div>
+</section>

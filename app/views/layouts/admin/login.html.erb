@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="<?=$site['language'] ?>">
+<head>
+	<title><?=$site['title'] ?> 관리자 | <?=$board['name'] ?>관리</title>
+	<meta charset="utf-8" />
+	<meta name="robots" content="noindex, nofollow">
+	<meta name="application-name" content="<?=$site['application-name'] ?>" />
+	<meta name="description" content="<?=$site['description'] ?>" />
+	<meta name="author" content="Sleeping-Lion" />
+	<link rel="shortcut icon" href="/images/favicon.ico" />
+	<link rel="stylesheet" type="text/css" href="/stylesheets/admin/login.css" media="all" />
+</head>
+<body>
+<!--[if lt IE 7]>
+<div style="clear:both;text-align:center;position:relative">
+	<a href="http://www.microsoft.com/windows/internet-explorer/default.aspx?ocid=ie6_countdown_bannercode"><img src="http://www.theie6countdown.com/images/upgrade.jpg" border="0"  alt="" /></a>
+</div>
+<![endif]-->
+<!--[if lt IE 9]>
+<script type="text/javascript" src="/javascripts/html5.js"></script>
+<link href="/stylesheets/ie.css" media="all" rel="stylesheet" type="text/css" />
+<![endif]-->	
+<?php require_once $template['main']; ?>
+<script type="text/javascript" src="/javascripts/jquery-1.7.min.js"></script>
+<script type="text/javascript" src="/javascripts/account/sha1.js"></script>
+<script type="text/javascript" src="/javascripts/admin/login/index.js"></script>
+</body>
+</html>

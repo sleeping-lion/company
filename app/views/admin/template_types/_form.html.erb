@@ -1,0 +1,23 @@
+<%= form_for [:admin, @admin_template_type],:html=>{:class=>'slboard_form'} do |f| %>
+	<% if @admin_template_type.errors.any? %>
+	<div id="error_explanation">
+		<h2><%= pluralize(@admin_template_type.errors.count, "error") %> prohibited this notice from being saved:</h2>
+		<ul>
+			<% @admin_template_type.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+			<% end %>
+		</ul>
+	</div>
+	<% end %>
+	<div class="field">
+		<%= f.label :name %><br />
+		<%= f.text_field :name,{'class'=>'sl_input','required'=>'required'} %>
+	</div>
+	<div class="field">
+		<%= f.label :korean_name %><br />
+		<%= f.text_field :korean_name,{'class'=>'sl_input'} %>
+	</div>
+	<div class="actions">
+		<%= f.submit '작성' %>
+	</div>
+<% end %>

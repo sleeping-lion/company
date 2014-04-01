@@ -1,0 +1,30 @@
+<%= form_for @maintain,:html=>{:class=>'slboard_form'} do |f| %>
+	<% if @maintain.errors.any? %>
+	<div id="error_explanation">
+		<h2><%= pluralize(@maintain.errors.count, "error") %> prohibited this notice from being saved:</h2>
+		<ul>
+			<% @maintain.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+			<% end %>
+		</ul>
+	</div>
+	<% end %>
+	<div class="field">
+		<%= f.label :title,'제목 ' %><br />
+		<%= f.text_field :title,{'class'=>'sl_input','required'=>'required'} %>
+	</div>
+	<div class="field">
+		<%= f.label :photo,'사진' %><br />
+		<%= f.file_field :photo %>
+		<%= f.hidden_field :photo_cache %>
+	</div>	
+	<%= f.fields_for :maintain_content do |c| %>
+	<div class="field">
+		<%= c.label :content,'내용' %><br />
+		<%= c.text_area :content,{'id'=>'sl_content','class'=>'sl_input','required'=>'required'}  %>
+	</div>
+	<% end %>
+	<div class="actions">
+		<%= f.submit '작성' %>
+	</div>
+<% end %>

@@ -1,0 +1,60 @@
+<section id="slboard_notice_main" class="sub_main">
+	<div class="section_top">
+		<h2><%=@controller_name %></h2>
+	</div>
+	<table width="100%" cellpadding="0" cellspacing="0" class="slboard_list">
+		<colgroup>
+			<col width="100px" />
+			<col />
+			<col width="50px" />
+			<col width="50px" />
+		</colgroup>
+		<thead>
+			<tr>
+				<th><p class="sl_title">사진</p></th>			
+				<th><p class="sl_name">제목</p></th>
+				<th colspan="2" class="sl_right"><p class="sl_registered_date">관리</p></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% if(@admin_menus.length>0) %>
+			<% @admin_menus.each do |menu| %>
+			<tr>
+				<td><p><%= image_tag(menu.photo.medium_thumb) %></p></td>			
+				<td><p class="sl_name"><%=menu.title %></p></td>
+				<td class="sl_right">
+					<p class="sl_registered_date">
+					<%=link_to '수정',edit_admin_menu_path(menu) %>
+					</p>
+				</td>
+				<td>
+					<form action="" method="post">
+						<% if(menu.enable) %>
+						
+						<% else %>
+						
+						<% end %>
+    					<div class="action">
+							<% if(menu.enable) %>
+							<input type="submit" value="비활성하기" />
+							<% else %>
+							<input type="submit" value="활성하기" />
+							<% end %>
+						</div>
+					</form>
+				</td>
+			</tr>
+			<% end %>			
+			<% else %>
+			<tr>
+				<td colspan="4"><p>글이 없습니다.</p></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+	<div id="sl_bottom_menu">
+		<div class="flickr_pagination">
+			<%= paginate @admin_menus %>
+  		</div>
+	</div>
+</section>

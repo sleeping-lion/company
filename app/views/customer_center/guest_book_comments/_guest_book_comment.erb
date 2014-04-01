@@ -1,0 +1,39 @@
+<div class="sl_comments">
+	<% if guest_book_comment.user %>
+  	<% if guest_book_comment.user.photo? %>
+  	<figure>
+		<%= image_tag(guest_book_comment.user.photo.small_thumb) %>
+		<figcaption><%= guest_book_comment.user.name %></figcaption>	
+  	</figure>
+	<% end %>
+  	<% end %>
+  	<dl>
+  		<dt>글쓴이</dt>
+  		<dd>
+  			<% if guest_book_comment.user %>
+  			<%= guest_book_comment.user.name %>
+  			<% else %> 		
+  			<%= guest_book_comment.name %>
+			<% end %>
+		</dd>
+  		<dt>내용</dt>
+  		<dd><%=simple_format(guest_book_comment.content) %>
+  			<div>
+  				<% if guest_book_comment.user %>
+  					<% if current_user %>
+  						<% if guest_book_comment.user_id==current_user.id %>
+  							<%=link_to '수정', edit_customer_center_guest_book_guest_book_comment_path(@guest_book,guest_book_comment) %> &nbsp; | &nbsp;	
+  							<%= link_to '삭제', customer_center_guest_book_guest_book_comment_path(@guest_book,guest_book_comment), method: :delete, data: { confirm: '정말로 삭제합니까?' } %>
+  						<% end %>
+  					<% end %>	
+  				<% else %>
+					<%=link_to '수정', edit_customer_center_guest_book_guest_book_comment_path(@guest_book,guest_book_comment) %> &nbsp; | &nbsp;
+					<%= link_to '삭제',customer_center_guest_book_guest_book_comment_path(@guest_book,guest_book_comment), method: :delete %>	
+  				<% end %>
+  			</div>
+  		</dd>
+  	</dl>
+	<div class="sl_registered_date">
+		<%=guest_book_comment.created_at.to_date %>
+	</div>
+</div>

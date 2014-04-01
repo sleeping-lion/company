@@ -1,0 +1,30 @@
+<div class="sl_answers">
+	<% if question_answer.user %>
+	<% if question_answer.user.photo %>
+	<figure>
+		<%= image_tag(question_answer.user.photo.small_thumb) %>
+		<figcaption><%= question_answer.user.name %></figcaption>	
+	</figure>
+	<% end %>
+	<% end %>	
+	<dl>
+  		<dt>글쓴이</dt>
+  		<dd>
+  			<% if question_answer.user %>
+  			<%= question_answer.user.name %>
+  			<% else %> 		
+  			<%= question_answer.name %>
+			<% end %>
+		</dd>
+		<dt>내용</dt>
+		<dd><%=simple_format(question_answer.content) %>
+			<div>
+  				<%=link_to '수정', edit_customer_center_question_question_answer_path(@question,question_answer) %> &nbsp; | &nbsp;	
+				<%=link_to_delete(question_answer,@question) %>					
+			</div>
+		</dd>
+	</dl>
+	<div class="sl_registered_date">
+		<%=getFormatDate(question_answer.created_at.to_s) %>
+	</div>
+</div>

@@ -1,0 +1,17 @@
+<section id="board_confirm_delete" class="sub_main">
+	<div class="section_top">
+		<h2><%=@board_name %></h2>
+		<p class="path"><%=link_to '홈으로',root_path,:title=>'홈으로' %>  &gt; <strong><%=@board_name %></strong></p>
+	</div>
+	<p id="notice">게시물을 삭제하겠습니까?</p>		
+	<%= form_tag(url_for(:action=>'destroy',:id=>@gid),:method=>:delete) do %>	
+		<%=hidden_field_tag :confirm,1 %>
+		<div class="actions">
+			<%= link_to '취소',@parent %>
+			<%= submit_tag '확인' %>
+		</div>
+	<% end %>
+	<div id="sl_content_bottom_menu">	
+	<%= link_to '돌아가기', @parent %>
+	</div>
+</section>

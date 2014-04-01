@@ -1,0 +1,9 @@
+<section id="edit_template_author" class="sub_main">
+	<div class="section_top">
+		<h2><%=@controller_name %></h2>
+		<p class="path"><%=link_to '홈으로',root_path,:title=>'홈으로' %>  &gt; <strong><%=@controller_name %></strong></p>
+	</div>
+	<%= render 'form' %>
+	<%= link_to '상세보기', admin_template_author_path(@admin_template_author) %> |
+	<%= link_to '목록으로', admin_template_authors_path %>
+</section>

@@ -1,0 +1,19 @@
+<%= form_for(['customer_center',@question, @question_comments.build]) do |f| %>
+	<% unless user_signed_in? %>
+	<div class="field">
+		<%= f.label :name %><br />
+		<%= f.text_field :name,{:class=>'sl_input',:required=>'required'} %>
+ 	</div>
+ 	<div class="field">
+ 		<%= f.label :password %><br />
+ 		<%= f.password_field :password,{:class=>'sl_input',:required=>'required'} %>
+ 	</div>
+ 	<% end %>
+ 	<div class="field">
+ 		<%= f.label :content %><br />
+ 		<%= f.text_area :content,{:class=>'sl_input',:required=>'required'} %>
+ 	</div>
+ 	<div class="actions">
+ 		<%= f.submit '댓글 쓰기' ,:class=>"btn btn-primary" %>
+ 	</div>
+<% end %>

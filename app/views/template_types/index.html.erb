@@ -1,0 +1,43 @@
+<section id="template_types" class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title" id="myModalLabel">KB 임직원의 마음</h4>
+    </div>
+    <div class="modal-body">
+  
+  <% unless @template_types.empty? %>
+  <% @template_types.each_slice(10) do |template_type10| %>
+  <ul class="template_types">
+    <% template_type10.each do |template_type| %>
+    <li>
+      <input type="checkbox" id="template_type_<%=template_type.id %>" name="template_type[]" value="<%=template_type.id %>" />
+      <label for="template_type_<%=template_type.id %>" ><%=template_type.name %></label>
+    </li>
+    <% end %>
+  </ul>
+  <% end %>
+  <% end %>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" data-dismiss="modal"><%=t(:confirm) %></button>
+    </div>
+
+</section>
+<script type="text/javascript">
+	$('#f2 input').each(function(){
+		var val1=$(this).val();
+		$('#template_types input').each(function(){
+			if(val1==$(this).val())
+			$(this).attr('checked','checked');
+		});
+	});
+
+	$('#template_types input[type="button"]').click(function(){
+		$('#f2').empty();	
+		$("#template_types input:checked").each(function(){
+			$('#f2').append('<li><input type="hidden" name="template_type_id[]" value="'+$(this).val()+'" />'+$(this).parent().find('label').text()+'</li>');
+		});
+		oinst.close();
+	});
+</script>

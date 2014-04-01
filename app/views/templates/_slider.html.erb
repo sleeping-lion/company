@@ -1,0 +1,53 @@
+<section class="template_slider">
+	<div class="top">
+		<h2>디자인시안</h2>
+		<%=link_to 'more',templates_path,{:title=>'템플릿 더보기',:class=>'more'} %>
+		<a class="next"><span>다음</span></a>
+		<a class="prev"><span>이전</span></a>		
+	</div>
+	<div class="template none">
+		<div class="template_img">
+			<input type="hidden" value="">
+			<a href=""  target="_blank">
+				<img src="" alt="" />
+			</a>
+		</div>
+		<div class="bottom_link">
+			<a href="">데모</a><span class="devide_word">|</span>
+			<a href="" target="_blank">상세</a>
+		</div>
+		<p class="package_name"></p>
+	</div>
+	<div class="scrollable">
+		<% if @templateSliders.length>0 %>
+		<ul class="items">
+			<% @templateSliders.each_slice(5) do |template5| %>	
+			<li>
+			<% template5.each_with_index do |template,index| %>
+				<article class="template<% if(index+1==5) %> nm<% end %>">
+					<div class="template_img">
+						<input type="hidden" value="<%=template.main_screenshot %>" />
+						<%=link_to template_path(:id=>template,:product=>template.template_type.product_id),:target=>'_blank',:class=>'detail_link' do %>
+						<%=image_tag template.small_screenshot %>
+						<% end %>
+					</div>
+					<div class="bottom_link">
+						<%=link_to '데모',:html=>{:target=>'_blank',:class=>'demo_link'} %><span class="devide_word">|</span>
+						<%=link_to '상세',template_path(template,:product=>template.template_type.product_id,),:target=>'_blank',:class=>'detail_link'  %>
+					</div>
+					<dl>
+						<dt>Type</dt>
+						<dd><%=template.template_type.name %></dd>
+						<dt>ID</dt>
+						<dd><%=template.id %></dd>
+					</dl>
+				</article>
+			<% end %>
+			</li>
+		<% end %>
+		</ul>
+		<% else %>
+		<p></p>
+		<% end %>
+	</div>
+</section>

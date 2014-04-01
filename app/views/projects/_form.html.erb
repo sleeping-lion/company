@@ -1,0 +1,28 @@
+<%= form_for(@project) do |f| %>
+  <% if @project.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+      <ul>
+      <% @project.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+	<div class="field">
+		<%= f.label :title,'제목' %><br />
+		<%= f.text_field :title, {:class=>'sl_input',:required=>'required'} %>
+	</div>
+	<div class="field">
+		<%= f.label :description,'설명' %><br />
+		<%= f.text_field :description, {:class=>'sl_input',:required=>'required'} %>
+	</div>	
+	<div class="field">
+		<%= f.label :photo,'사진' %><br />
+		<%= f.file_field :photo %>
+		<%= f.hidden_field :photo_cache %>
+	</div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

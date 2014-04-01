@@ -1,0 +1,16 @@
+<article id="sl_main_notice" class="sl_main_list">
+	<h3><%=t('activerecord.models.notice') %></h3>
+	<ul>
+		<% unless @notices.empty? %>
+		<% @notices.each do |notice| %>
+		<li>
+			<%= link_to notice.title.truncate(16), notice  %>
+			<span class="sl_created_at"><%=notice.created_at.to_date %></span>
+		</li>
+		<% end %>
+		<% else %>
+		<li><%=t(:no_data) %></li>
+		<% end %>
+	</ul>
+	<%=link_to t(:link_more),notices_path,:class=>'more' %>
+</article>

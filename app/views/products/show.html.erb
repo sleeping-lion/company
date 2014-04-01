@@ -1,0 +1,13 @@
+<section id="product_show">
+  
+  
+  
+	<div id="sl_content_bottom_menu">
+	<% if user_signed_in? %>
+	<% if current_user.admin? %>	
+	<%= link_to '수정', edit_product_path(@product) %> |
+	<% end %>
+	<% end %>
+	<%= link_to '목록으로', products_path %>
+	</div>
+</section>

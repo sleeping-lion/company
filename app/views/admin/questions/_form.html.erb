@@ -1,0 +1,25 @@
+<%= form_for [:admin, @admin_notice],:html=>{:class=>'slboard_form'} do |f| %>
+	<% if @admin_notice.errors.any? %>
+	<div id="error_explanation">
+		<h2><%= pluralize(@admin_notice.errors.count, "error") %> prohibited this notice from being saved:</h2>
+		<ul>
+			<% @admin_notice.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+			<% end %>
+		</ul>
+	</div>
+	<% end %>
+	<div class="field">
+		<%= f.label :title %><br />
+		<%= f.text_field :title,{'class'=>'sl_input','required'=>'required'} %>
+	</div>
+	<%= f.fields_for :notice_content do |c| %>
+	<div class="field">
+		<%= c.label :content,'내용' %><br />
+		<%= c.text_area :content,{'id'=>'sl_content','class'=>'sl_input','required'=>'required'}  %>
+	</div>
+	<% end %>
+	<div class="actions">
+		<%= f.submit '작성' %>
+	</div>
+<% end %>

@@ -1,0 +1,8 @@
+<section id="quesetion_answer_edit" class="sub_main">
+	<div class="section_top">
+		<h1><%=@controller_name %></h1>
+		<p class="path"><%=link_to_home %> &gt; <strong><%=@controller_name %></strong></p>
+	</div>
+	<%= render 'form' %>
+	<%= link_to '목록으로', customer_center_question_path(@gid) %>
+</section>

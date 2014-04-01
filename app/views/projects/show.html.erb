@@ -1,0 +1,17 @@
+<section id="projects" class="sub_main">
+	<div class="section_top">
+		<h1><%=@controller_name %></h1>
+		<p class="path"><%=link_to_home %> &gt; <strong><%=@controller_name %></strong></p>
+	</div>
+	<p id="notice"><%= notice %></p>
+	<p>
+  	<b>Title:</b>
+  <%= @project.title %>
+	</p>
+	<% if user_signed_in? %>
+	<% if current_user.admin? %>	
+	<%= link_to '수정', edit_project_path(@project) %> |
+	<% end %>
+	<% end %>
+	<%= link_to '목록으로', projects_path %>
+</section>

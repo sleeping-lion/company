@@ -1,0 +1,61 @@
+<% if notice %>
+<%= render :partial => 'layouts/notice',:locals=>{:notice=>notice} %>
+<% end %>
+<section id="guest_book_show">
+	<div class="slboard_content">
+		<div class="sl_content_header box_header">
+			<h2><%= @guest_book.title %></h2>
+			<p><%=t(:label_name)%> :<%= @guest_book.name %>&nbsp;&nbsp;&nbsp; <%=t(:label_created_at)%> : <%= @guest_book.created_at %></p>
+		</div>
+		<div class="sl_content_main">
+			<div class="sl_content_text"><%= simple_format(@guest_book.guest_book_content.content) %></div>
+		</div>
+	</div>
+	<% unless @guest_book_comments.empty? %>
+	<div class="box">
+		<div class="box_header">
+			<h2>댓글</h2>
+			<div class="box_icon">
+				<a href="#" class="btn_minimize"><i class="glyphicon glyphicon-chevron-up"></i></a>
+				<a href="#" class="btn_close"><i class="glyphicon glyphicon-remove"></i></a>			
+			</div>
+		</div>
+		<div class="box_content">
+			<ul class="sl_comment_list_layer media-list">
+				<%= render @guest_book_comments %>
+			</ul>
+			<%= paginate @guest_book_comments %>			
+		</div>
+	</div>
+	<% end %>
+	<div class="box">
+		<div class="box_header">
+			<h2>댓글 쓰기</h2>
+			<div class="box_icon">
+				<a href="#" class="btn_minimize"><i class="glyphicon glyphicon-chevron-up"></i></a>
+				<a href="#" class="btn_close"><i class="glyphicon glyphicon-remove"></i></a>
+			</div>
+		</div>
+		<div class="box_content">		
+			<%= render "customer_center/guest_book_comments/form" %>
+		</div>
+	</div>
+	<div id="sl_content_bottom_menu">
+		<%= link_to t(:link_list), customer_center_guest_books_path %> 
+		<% if @guest_book.user %>
+			<% if current_user %>
+				<% if @guest_book.user_id==current_user.id %>
+					 &nbsp; | &nbsp; <%=link_to t(:link_edit), edit_customer_center_guest_book_path(@guest_book) %> &nbsp; | &nbsp;	
+					<%= link_to t(:link_delete), customer_center_guest_book_path(@guest_book), method: :delete, data: { confirm: t(:delete_confirm)} %>
+				<% end %>
+			<% end %>
+		<% else %>
+			 &nbsp; | &nbsp; <%=link_to t(:link_edit), edit_customer_center_guest_book_path(@guest_book) %> &nbsp; | &nbsp;
+			<% if checkPriv(@guest_book) %>
+			<%= link_to t(:link_delete), customer_center_guest_book_path(@guest_book), method: :delete, data: { confirm: t(:delete_confirm)} %>			
+			<% else %>
+			<%= link_to t(:link_delete), customer_center_guest_book_path(@guest_book), method: :delete %>
+			<% end %>			
+		<% end %>
+	</div>
+</section>

@@ -1,0 +1,42 @@
+	<div id="creative-website-slider">
+		<div id="slider10">
+			<div class="scrollable">
+				<ul class="items">
+					<li class="item"><%=image_tag '/assets/products/slide1.png',{:width=>620,:height=>229} %></li>
+					<li class="item"><%=image_tag '/assets/products/slide2.png',{:width=>620,:height=>229} %></li>
+					<li class="item"><%=image_tag '/assets/products/slide3.png',{:width=>620,:height=>229} %></li>
+					<li class="item"><%=image_tag '/assets/products/slide4.png',{:width=>620,:height=>229} %></li>
+					<li class="item"><%=image_tag '/assets/products/slide5.png',{:width=>620,:height=>229} %></li>
+				</ul>
+			</div>
+				<div class="navi"><a class="active" href="#0"></a><a class="" href="#1"></a><a class="" href="#2"></a><a class="" href="#3"></a><a  href="#4"></a></div>						
+			</div>			
+			<div id="thumbnail_list">
+				<div class="featured-thumbs-left">
+					<h3><span>등록디자인</span></h3>
+					<span class="design_count"><span><!--{allCount}--></span></span>
+				</div>
+				<div class="featured-thumbs-rite">
+					<ul id="thumbs">
+						<!--{@productGroupList.list}-->
+						<!--{?.index_<7}-->
+						<li><a href="/template/index.php?product_id={.first_product_id}" class="style{.id}">
+							<span class="image">&nbsp;</span>
+							<label><!--{.name}--></label>
+							<strong><!--{.count}--></strong></a>
+						</li>
+						<!--{/}-->
+						<!--{/}-->
+						<li class="last_li"><a href="/template/index.php?recommed=1" class="style8">
+							<span class="image">&nbsp;</span>
+							<label>추천디자인</label>
+							<strong>995</strong></a>
+						</li>						
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div style="float:right">
+		<a href="http://vimeo.com/27282303" target="_blank"><img src="/images/homepage/shit.jpg" alt="" /></a>
+		</div>			
+		<img src="/images/homepage/temp_ad3.jpg" style="margin:7px 0 0;float:right" height="169" width="215"/>

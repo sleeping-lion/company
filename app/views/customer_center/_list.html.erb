@@ -1,0 +1,61 @@
+<section class="main_list main_customer_center">
+  <section class="row">  
+	<article class="col-xs-6">
+		<h2>견적문의 현황</h2>
+		<ul>
+			<% unless @questions.empty? %>
+			<% @questions.each do |question| %>
+			<li><%=link_to question.title.truncate(10),customer_center_question_path(question) %><span><%=getFormatDate(question.created_at.to_s) %></span><li>
+			<% end %>
+			<% else %>
+			<li><%=t(:no_data) %></li>
+			<% end %>
+		</ul>
+		<%=link_to 'more',customer_center_questions_path,:class=>'more' %>				
+	</article>
+	<article class="col-xs-6">
+		<h2>공지사항</h2>	
+		<ul>
+			<% unless @notices.empty? %>
+			<% @notices.each do |notice| %>
+			<li><%=link_to notice.title.truncate(10),customer_center_notice_path(notice) %><span><%=getFormatDate(notice.created_at.to_s) %></span><li>
+			<% end %>
+			<% else %>
+			<li><%=t(:no_data) %></li>
+			<% end %>			
+		</ul>
+		<%=link_to 'more',customer_center_notices_path,:class=>'more' %>			
+	</article>
+	</section>
+	<section class="row">
+	<article class="col-xs-6">
+		<h2>상담</h2>
+		<ul>
+			<% unless @guest_books.empty? %>
+			<% @guest_books.each do |guest_book| %>
+			<li><%=link_to guest_book.title.truncate(10),customer_center_guest_book_path(guest_book) %><span><%=getFormatDate(guest_book.created_at.to_s) %></span><li>
+			<% end %>
+			<% else %>
+			<li><%=t(:no_data) %></li>
+			<% end %>			
+		</ul>
+		<%=link_to 'more',customer_center_notices_path,:class=>'more' %>		
+	</article>
+	<article class="col-xs-6">
+		<h2>진행중인 프로젝트</h2>
+		<ul>
+			<% unless @projects.empty? %>
+			<% @projects.each do |project| %>
+			<li><a href="/project/index.php" title="{.title}" {?.secret}{?_SESSION['maintain']}{?!in_array(.id,_SESSION['maintain'])}rel="#overlay"{/}{:}rel="#overlay"{/}{/}><span class="name"><!--{=truncate(.title,14)}--></span></a><span class="new_icon"><span>new</span></span>
+    		<div class="progress progress-striped active">
+    			<div class="bar" style="width: 40%;"></div>
+    		</div>
+			<% end %>
+			<% else %>
+			<li><%=t(:no_data) %></li>
+			<% end %>
+		</ul>
+		<%=link_to 'more',customer_center_questions_path,:class=>'more' %>					
+	</article>	
+	</section>
+</section>

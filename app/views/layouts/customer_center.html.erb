@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title><%=@title %></title>
+<meta charset="utf-8">
+<meta name="robots" content="<%=@meta_robot %>" />
+<meta name="application-name" content="<%=@meta_application_name %>" />
+<meta name="keywords" content="<%=@meta_keyword %>" />
+<meta name="description" content="<%=@meta_description %>" />
+<meta name="author" content="Sleeping-Lion" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" href="<%=asset_path('favicon.ico') %>" />
+<%= stylesheet_link_tag "//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css", :media => "all" %>
+<%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+<%= csrf_meta_tags %>
+</head>
+<body>
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<%= render :partial => 'layouts/header' %>
+<section id="mom">
+  <section id="main" class="container">
+      <% unless current_page?(root_path) %>
+      <div class="page-header">
+        <h1><%=@controller_name %></h1>
+        <ul class="breadcrumb">
+          <li><%=link_to t(:home),root_path %></li>
+          <% if @page_category %>
+          <li><%=link_to @page_category %></li>
+          <% end %>
+          <li class="active"><%=@controller_name %></li>
+        </ul>
+      </div>
+      <% else %>
+      <hr class="none">
+      <% end %>               
+    <section class="sub_main">
+      <%= render :partial => 'customer_center/top' %>
+      <div class="board_left"> 
+      <%=yield %>
+      </div>
+      <%= render :partial => 'customer_center/aside' %>      
+    </section>
+  </section>
+</section>
+<%= render :partial => 'layouts/footer' %>
+<div class="slboard_overlay" id="overlay"></div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+<%= javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js" %>
+<%= javascript_include_tag "//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js" %>
+<%= javascript_include_tag @script, "data-turbolinks-track" => true %>
+</body>
+</html>

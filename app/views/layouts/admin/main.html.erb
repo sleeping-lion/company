@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>Framework</title>
+	<meta charset="utf-8">	
+	<meta name="robots" content="all, index, follow" />
+	<meta name="subject" content="잠자는사자 홈페이지" />
+	<meta name="keywords" content="정종호,잠자는사자,SL,SleepingLion,Sleeping-Lion" />
+	<meta name="description" content="잠자는사자의집입니다." />
+	<meta name="author" content="Sleepint-Lion" />
+	<link rel="shortcut icon" href="/images/favicon.ico" />
+	<%= stylesheet_link_tag @style, :media => "all" %>
+	<%= csrf_meta_tags %>
+<body>
+<!--[if lt IE 9]>
+<%= javascript_include_tag "/assets/html5.js" %>
+<%= stylesheet_link_tag "/assets/ie.css", :media => "all" %>
+<![endif]-->
+<%= render :partial => 'layouts/admin/header' %>	
+<div id="mom">
+	<div id="main">
+		<div class="wrapper">
+			<%= yield %>	
+		</div>
+	</div>
+</div>
+<div class="slboard_overlay" id="overlay"></div>
+<%= javascript_include_tag @script %>
+</body>
+</html>

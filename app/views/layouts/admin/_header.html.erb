@@ -1,0 +1,15 @@
+<header>
+	<nav>
+		<ul>
+			<li><%=link_to '홈' , '/admin' %></li>
+			<li><%=link_to '메뉴관리',:controller=>'menus' %></li>
+			<li><%=link_to '상품관리',:controller=>'products' %></li>	
+			<li><%=link_to '템플릿관리',:controller=>'templates' %></li>
+			<li><%=link_to '게시판관리',:controller=>'products' %></li>
+		</ul>
+	</nav>	
+	<div id="welcome">환영합니다. 
+		<%=link_to(current_user.name,edit_user_registration_path) %>님 환영합니다.
+		<%= link_to('로그아웃',destroy_user_session_path) %>		
+	</div>
+</header>

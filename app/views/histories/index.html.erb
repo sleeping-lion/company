@@ -1,0 +1,24 @@
+<section id="sl_history_index">
+  <h2><%=t('activerecord.models.history') %></h2>
+		<dl>
+		  <% unless @histories.empty? %>
+		  <% @histories.each do |history| %>
+		  <dt><%=history.year %></dt>
+		  <dd>
+		    <b><%=history.title %></b>
+		    <%=simple_format(history.content) %>
+		    <% if can? :manage, History %>
+		    <div class="history_menu">
+		      <%= link_to t(:link_edit), edit_history_path(history),:rel=>"nofollow" %> &nbsp; | &nbsp; <%= link_to t(:link_delete), history, method: :delete, data: { confirm: t(:delete_confirm) },:rel=>"nofollow" %>
+		    </div>
+      <% end %>
+    </dd>
+    <% end %>
+    <% end %>
+  </dl>
+  <div id="sl_bottom_menu">
+  <% if can? :create, History %>
+    <%= link_to t(:link_new), new_history_path,:rel=>"nofollow" %>
+  <% end %>
+  </div>
+</section>

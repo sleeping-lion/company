@@ -1,0 +1,13 @@
+<section class="main_list maintain_list row">
+  <h2>유지보수</h2>
+  <ul>
+    <% unless @maintains.empty? %>
+    <% @maintains.each do |maintain| %>
+    <li><%=link_to maintain.title.truncate(10),maintain_path(maintain) %><span class="created_at"><%=maintain.created_at.to_date %></span><li>
+    <% end %>
+    <% else %>
+    <li><%=t(:no_data)%></li>
+    <% end %>
+  </ul>
+  <%=link_to 'more',maintain_index_path,:class=>'more' %>
+</section>

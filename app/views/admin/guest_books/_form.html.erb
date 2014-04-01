@@ -1,0 +1,35 @@
+<%= form_for ['admin',@admin_guest_book],:html=>{:class=>'slboard_form'} do |f| %>
+	<% if @admin_guest_book.errors.any? %>
+	<div id="error_explanation">
+		<h2><%= pluralize(@admin_guest_book.errors.count, "error") %> prohibited this notice from being saved:</h2>
+		<ul>
+			<% @admin_guest_book.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+			<% end %>
+		</ul>
+	</div>
+	<% end %>
+	<% unless user_signed_in? %>	
+	<div class="field">
+		<%= f.label :name,'이름' %><br />
+		<%= f.text_field :name,{:class=>'sl_input',:required=>'required'} %>
+	</div>
+	<div class="field">
+		<%= f.label :passsword,'비밀번호' %><br />
+		<%= f.password_field :password,{:class=>'sl_input',:required=>'required'} %>
+	</div>
+	<% end %>
+	<div class="field">
+		<%= f.label :title,'제목' %><br />
+		<%= f.text_field :title,{:class=>'sl_input',:required=>'required'} %>
+	</div>		
+	<%= f.fields_for :guest_book_content do |c| %>
+	<div class="field">
+		<%= c.label :content,'내용' %><br />
+		<%= c.text_area :content,{:class=>'sl_input',:required=>'required'} %>
+	</div>
+	<% end %>
+	<div class="actions">
+		<%= f.submit '제출' %>
+	</div>
+<% end %>

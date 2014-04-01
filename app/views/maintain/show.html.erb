@@ -1,0 +1,23 @@
+<section id="maintain_show" class="sub_main">
+	<div class="section_top">
+		<h1><%=@controller_name %></h1>
+		<p class="path"><%=link_to_home %> &gt; <strong><%=@controller_name %></strong></p>	
+	</div>
+	<p id="notice"><%= notice %></p>
+	<div class="slboard_content">
+		<div class="sl_content_header">
+			<h3><%=@maintain.title %></h3>
+		</div>
+		<div class="sl_content_main">
+			<div class="sl_content_text"><%= simple_format(@maintain.maintain_content.content) %></div>
+		</div>
+	</div>
+	<div id="sl_content_bottom_menu">
+	<% if user_signed_in? %>
+	<% if current_user.admin? %>	
+	<%= link_to '수정', edit_maintain_path(@maintain) %> |
+	<% end %>
+	<% end %>
+	<%= link_to '목록으로',maintain_index_path %>
+	</div>
+</section>

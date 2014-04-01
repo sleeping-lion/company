@@ -1,0 +1,19 @@
+<%=form_for ['customer_center',@faq_category],:html=>{:class=>'slboard_form'} do |f| %>
+  <% if @faq_category.errors.any? %>
+    <div id="error_explanation">
+      <h1><%= pluralize(@faq_category.errors.count, "error") %> prohibited this faq from being saved:</h1>
+      <ul>
+      <% @faq_category.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>    
+  <% end %>
+  <div class="field">
+    <%= f.label :title,'제목' %><br />
+    <%= f.text_field :title,:class=>'sl_input',:required=>'required' %>
+  </div> 
+  <div class="actions">
+    <%= f.submit '작성' %>
+  </div>
+<% end %>

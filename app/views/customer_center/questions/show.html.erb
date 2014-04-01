@@ -1,0 +1,41 @@
+<% if notice %>
+<%= render :partial => 'layouts/notice',:locals=>{:notice=>notice} %>
+<% end %>
+<section id="question_show">
+	<div class="slboard_content">
+		<div class="sl_content_header">
+			<h3><%= @question.title %></h3>
+			<p>작성자 :<%= @question.name %>&nbsp;&nbsp;&nbsp; 작성일 : <%= @question.created_at %></p>
+		</div>
+		<div class="sl_content_main">
+			<div class="sl_content_text"><%= simple_format(@question.question_content.content) %></div>
+		</div>
+	</div>
+	<div id="sl_answer_list_layer">
+		<%= render @question_comments %>	
+	</div>
+	<% unless @question_comments.empty? %>
+	<div><%= paginate @question_answer %></div>
+	<% end %>
+	<div id="sl_comment_form_layer">
+		<%= render "customer_center/question_comments/form" %>
+	</div>
+	<div id="sl_content_bottom_menu">
+		<%= link_to t(:link_list), customer_center_questions_path %> 
+		<% if @question.user %>
+			<% if current_user %>
+				<% if @question.user_id==current_user.id %>
+					 &nbsp; | &nbsp; <%=link_to t(:link_edit), edit_customer_center_question_path(@question) %> &nbsp; | &nbsp;	
+					<%= link_to t(:link_delete), ['customer_center',@question], method: :delete, data: { confirm: t(:delete_confirm) } %>
+				<% end %>
+			<% end %>
+		<% else %>
+			 &nbsp; | &nbsp; <%=link_to t(:link_edit), edit_customer_center_question_path(@question) %> &nbsp; | &nbsp;
+			<% if checkPriv(@question) %>
+			<%= link_to t(:link_delete), ['customer_center',@question], method: :delete, data: { confirm: t(:delete_confirm) } %>			
+			<% else %>
+			<%= link_to t(:link_delete), ['customer_center',@question], method: :delete %>
+			<% end %>			
+		<% end %>
+	</div>
+</section>
