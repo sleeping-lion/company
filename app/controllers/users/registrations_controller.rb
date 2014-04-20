@@ -60,4 +60,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def after_update_path_for(resource)
     signed_in_root_path(resource)
   end
+  
+  protected
+  
+  def account_update_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :current_password, :description, :photo, :photo_cache)
+  end
+  
+  private
+
+  def resource_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :current_password, :description, :photo, :photo_cache)
+  end  
 end
